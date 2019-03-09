@@ -10,10 +10,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class ClockUnitTest {
-	Clock clock;
+	private Clock clock;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		SystemTimeProvider systemTimeProvider = new DummySystemTimeProvider();
 		clock = new Clock(systemTimeProvider);
 	}
@@ -34,10 +34,28 @@ public class ClockUnitTest {
 	}
 
 	@Test
+	public void testPauseSetsRunning() {
+		clock.start();
+		clock.pause();
+
+		assertFalse(clock.isRunning());
+	}
+
+	@Test
 	public void testStartElapsesTime() {
 		clock.start();
 
-		assertNotEquals(0, clock.getElapsedTime());
-		assertNotEquals("0:00:00", clock.getElapsedTimeString());
+		assertEquals(1000L, clock.getElapsedTime());
+		assertEquals("0:02:00", clock.getElapsedTimeString());
 	}
+
+	@Test
+	public void testPauseDoesNotElapseTime() {
+		clock.start();
+		clock.pause();
+
+		assertEquals(1000L, clock.getElapsedTime());
+		assertEquals(1000L, clock.getElapsedTime());
+	}
+
 }

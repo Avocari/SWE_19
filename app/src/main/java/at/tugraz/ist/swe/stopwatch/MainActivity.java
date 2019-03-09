@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
 		onClockCallback();
 	}
 
-
-
 	private void onClockCallback() {
 		clockTextView.setText(clock.getElapsedTimeString());
 		handler.postDelayed(new Runnable() {
