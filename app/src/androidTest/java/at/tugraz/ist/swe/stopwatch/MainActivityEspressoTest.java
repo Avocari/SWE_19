@@ -56,4 +56,20 @@ public class MainActivityEspressoTest {
 		Thread.sleep(100);
 		onView(withId(R.id.tv_clock)).check(matches(not(withText(currentElapsedTime))));
 	}
+
+	@Test
+	public void testClockPauseButtonStopsTime() throws InterruptedException {
+		onView(withId(R.id.bt_start)).perform(click());
+
+		Thread.sleep(100);
+
+		onView(withId(R.id.bt_start)).perform(click());
+
+		TextView textViewClock = mainActivityTestRule.getActivity().findViewById(R.id.tv_clock);
+		String currentElapsedTime = textViewClock.getText().toString();
+
+		Thread.sleep(100);
+
+		onView(withId(R.id.tv_clock)).check(matches(withText(currentElapsedTime)));
+	}
 }
