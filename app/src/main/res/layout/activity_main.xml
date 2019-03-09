@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/circle"
+        android:layout_centerInParent="true"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/tv_clock"
         android:layout_width="wrap_content"
@@ -24,22 +31,28 @@
         >
         <Button
             android:id="@+id/bt_reset"
+            style="?android:borderlessButtonStyle"
             android:text="@string/reset"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="ButtonStyle"  />
         <Button
             android:id="@+id/bt_start"
+            app:backgroundTint="@color/colorPrimary"
             android:text="@string/start"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="ButtonStyle"  />
         <Button
             android:id="@+id/bt_lap"
+            style="?android:borderlessButtonStyle"
             android:text="@string/lap"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 
