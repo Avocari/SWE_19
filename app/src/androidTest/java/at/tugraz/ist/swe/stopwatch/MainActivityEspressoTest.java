@@ -1,10 +1,7 @@
 package at.tugraz.ist.swe.stopwatch;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.View;
 import android.widget.TextView;
 
 import org.junit.Rule;
@@ -18,13 +15,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertEquals;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityEspressoTest {
 
@@ -86,4 +77,40 @@ public class MainActivityEspressoTest {
 		onView(withId(R.id.bt_start)).check(matches(withText(R.string.start)));
 	}
 
+	@Test
+	public void testResetButtonResetsTextView() throws InterruptedException {
+		onView(withId(R.id.bt_start)).perform(click());
+		Thread.sleep(100);
+		onView(withId(R.id.bt_reset)).perform(click());
+		onView(withId(R.id.tv_clock)).check(matches(withText("0:00:00")));
+	}
+
+	@Test
+	public void testResetButtonRenamesButtonText() {
+		onView(withId(R.id.bt_start)).perform(click());
+		onView(withId(R.id.bt_reset)).perform(click());
+
+		onView(withId(R.id.bt_start)).check(matches(withText(R.string.start)));
+	}
+
+	@Test
+	public void testResetButtonDoesNothingInitially() {
+		onView(withId(R.id.bt_reset)).perform(click());
+
+		onView(withId(R.id.bt_start)).check(matches(withText(R.string.start)));
+		onView(withId(R.id.tv_clock)).check(matches(withText("0:00:00")));
+	}
+
+	@Test
+	public void testResetButtonDoesNotElapseTime() throws InterruptedException {
+		onView(withId(R.id.bt_start)).perform(click());
+		onView(withId(R.id.bt_reset)).perform(click());
+
+		TextView textViewClock = mainActivityTestRule.getActivity().findViewById(R.id.tv_clock);
+		String currentElapsedTime = textViewClock.getText().toString();
+
+		Thread.sleep(100);
+
+		onView(withId(R.id.tv_clock)).check(matches(withText(currentElapsedTime)));
+	}
 }
