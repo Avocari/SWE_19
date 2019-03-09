@@ -32,11 +32,11 @@ public class Clock {
 
 	public void start() {
 		running = true;
-		startTime = systemTimeProvider.getElapsedRealTime();
+		startTime = systemTimeProvider.getElapsedRealTime() - offsetTime;
 	}
 
 	public void pause() {
 		running = false;
-		offsetTime = systemTimeProvider.getElapsedRealTime();
+		offsetTime = systemTimeProvider.getElapsedRealTime() - startTime;
 	}
 }
