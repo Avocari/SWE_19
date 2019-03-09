@@ -42,5 +42,6 @@ public class Clock {
 
 	public void reset() {
     	running = false;
+    	offsetTime = 0;
 	}
 }
