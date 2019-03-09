@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
 	private void onStartButtonClicked() {
 		clock.start();
+		onClockCallback();
+	}
+
+
+
+	private void onClockCallback() {
+		clockTextView.setText(clock.getElapsedTimeString());
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -41,9 +48,4 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}, 100);
 	}
-
-	private void onClockCallback() {
-		clockTextView.setText(clock.getElapsedTimeString());
-	}
-
 }
