@@ -14,7 +14,8 @@ public class ClockUnitTest {
 
 	@Before
 	public void setUp() throws Exception {
-		clock = new Clock();
+		SystemTimeProvider systemTimeProvider = new DummySystemTimeProvider();
+		clock = new Clock(systemTimeProvider);
 	}
 
 	@Test
@@ -33,9 +34,8 @@ public class ClockUnitTest {
 	}
 
 	@Test
-	public void testStartElapsesTime() throws InterruptedException {
+	public void testStartElapsesTime() {
 		clock.start();
-		Thread.sleep(100);
 
 		assertNotEquals(0, clock.getElapsedTime());
 		assertNotEquals("0:00:00", clock.getElapsedTimeString());
