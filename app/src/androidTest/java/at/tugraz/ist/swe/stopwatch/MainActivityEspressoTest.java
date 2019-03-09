@@ -4,16 +4,20 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+import android.widget.TextView;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -38,5 +42,18 @@ public class MainActivityEspressoTest {
 	public void testClockTextViewVisible() {
 		onView(withId(R.id.tv_clock)).check(matches(isDisplayed()));
 		onView(withId(R.id.tv_clock)).check(matches(withText("0:00:00")));
+	}
+
+	@Test
+	public void testClockTextViewElapsesTime() throws InterruptedException {
+		onView(withId(R.id.bt_start)).perform(click());
+
+		Thread.sleep(100);
+
+		TextView textViewClock = mainActivityTestRule.getActivity().findViewById(R.id.tv_clock);
+		String currentElapsedTime = textViewClock.getText().toString();
+
+		Thread.sleep(100);
+		onView(withId(R.id.tv_clock)).check(matches(not(withText(currentElapsedTime))));
 	}
 }
