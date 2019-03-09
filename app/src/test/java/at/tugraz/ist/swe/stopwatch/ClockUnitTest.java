@@ -68,4 +68,43 @@ public class ClockUnitTest {
 
 		assertTrue(clock.getElapsedTime() > 1000L);
 	}
+
+	@Test
+	public void testResetButtonInitalState() {
+		clock.reset();
+
+		assertFalse(clock.isRunning());
+		assertEquals(0L, clock.getElapsedTime());
+	}
+
+	@Test
+	public void testResetButtonSetsRunning() {
+		clock.start();
+		clock.reset();
+		
+		assertFalse(clock.isRunning());
+	}
+
+	@Test
+	public void testStartAfterReset() {
+		clock.start();
+
+        assertEquals(1000L, clock.getElapsedTime());
+        
+		clock.reset();
+
+		assertEquals(0L, clock.getElapsedTime());
+
+		clock.start();
+
+		assertEquals(1000L, clock.getElapsedTime());
+	}
+
+	@Test
+	public void testResetButtonResetsTime() {
+		clock.start();
+		clock.reset();
+
+		assertEquals(0L, clock.getElapsedTime());
+	}
 }

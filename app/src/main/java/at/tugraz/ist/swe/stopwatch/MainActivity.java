@@ -25,13 +25,22 @@ public class MainActivity extends AppCompatActivity {
 
 		clockTextView = findViewById(R.id.tv_clock);
 		startButton = findViewById(R.id.bt_start);
+		Button resetButton = findViewById(R.id.bt_reset);
 		Button startButton = findViewById(R.id.bt_start);
+
 		startButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				onStartButtonClicked();
 			}
 		});
+		resetButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onResetButtonClicked();
+			}
+		});
+
 
 		r = new Runnable() {
 			@Override
@@ -53,8 +62,19 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	private void onClockCallback() {
+	private void onResetButtonClicked() {
+		handler.removeCallbacks(r);
+		clock.reset();
+		startButton.setText(R.string.start);
+		updateClockTextView();
+	}
+
+	private void updateClockTextView() {
 		clockTextView.setText(clock.getElapsedTimeString());
+	}
+
+	private void onClockCallback() {
+		updateClockTextView();
 
 		handler.postDelayed(r, 50);
 	}
