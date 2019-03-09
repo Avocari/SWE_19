@@ -41,5 +41,6 @@ public class Clock {
 	}
 
 	public void reset() {
+    	running = false;
 	}
 }

@@ -113,4 +113,14 @@ public class MainActivityEspressoTest {
 
 		onView(withId(R.id.tv_clock)).check(matches(withText(currentElapsedTime)));
 	}
+
+	@Test
+	public void testResetButtonResetsAfterPause() throws InterruptedException {
+		onView(withId(R.id.bt_start)).perform(click());
+		Thread.sleep(100);
+		onView(withId(R.id.bt_start)).perform(click());
+		onView(withId(R.id.bt_reset)).perform(click());
+
+		onView(withId(R.id.tv_clock)).check(matches(withText("0:00:00")));
+	}
 }

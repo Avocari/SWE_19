@@ -70,7 +70,7 @@ public class ClockUnitTest {
 	}
 
 	@Test
-	public void testResetButtonInitalState() {
+	public void testResetInitalState() {
 		clock.reset();
 
 		assertFalse(clock.isRunning());
@@ -78,7 +78,7 @@ public class ClockUnitTest {
 	}
 
 	@Test
-	public void testResetButtonSetsRunning() {
+	public void testResetSetsRunning() {
 		clock.start();
 		clock.reset();
 		
@@ -101,8 +101,17 @@ public class ClockUnitTest {
 	}
 
 	@Test
-	public void testResetButtonResetsTime() {
+	public void testResetResetsTime() {
 		clock.start();
+		clock.reset();
+
+		assertEquals(0L, clock.getElapsedTime());
+	}
+
+	@Test
+	public void testResetResetsTimeAfterPause() {
+		clock.start();
+		clock.pause();
 		clock.reset();
 
 		assertEquals(0L, clock.getElapsedTime());
