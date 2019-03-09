@@ -3,17 +3,19 @@ package at.tugraz.ist.swe.stopwatch;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class ClockUnitTest {
-	Clock clock;
+	private Clock clock;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		SystemTimeProvider systemTimeProvider = new DummySystemTimeProvider();
 		clock = new Clock(systemTimeProvider);
 	}
@@ -34,10 +36,36 @@ public class ClockUnitTest {
 	}
 
 	@Test
+	public void testPauseSetsRunning() {
+		clock.start();
+		clock.pause();
+
+		assertFalse(clock.isRunning());
+	}
+
+	@Test
 	public void testStartElapsesTime() {
 		clock.start();
 
-		assertNotEquals(0, clock.getElapsedTime());
-		assertNotEquals("0:00:00", clock.getElapsedTimeString());
+		assertEquals(1000L, clock.getElapsedTime());
+		assertEquals("0:02:00", clock.getElapsedTimeString());
+	}
+
+	@Test
+	public void testPauseDoesNotElapseTime() {
+		clock.start();
+		clock.pause();
+
+		assertEquals(1000L, clock.getElapsedTime());
+		assertEquals(1000L, clock.getElapsedTime());
+	}
+
+	@Test
+	public void testResumeDoesNotResetTime() {
+		clock.start();
+		clock.pause();
+		clock.start();
+
+		assertTrue(clock.getElapsedTime() > 1000L);
 	}
 }

@@ -3,4 +3,5 @@
     <string name="reset">Reset</string>
     <string name="start">Start</string>
     <string name="lap">Lap</string>
+    <string name="pause">Pause</string>
 </resources>
