@@ -39,4 +39,9 @@ public class Clock {
 		running = false;
 		offsetTime = systemTimeProvider.getElapsedRealTime() - startTime;
 	}
+
+	public void reset() {
+    	running = false;
+    	offsetTime = 0;
+	}
 }
