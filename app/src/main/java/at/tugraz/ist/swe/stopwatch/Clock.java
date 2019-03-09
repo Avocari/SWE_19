@@ -8,8 +8,9 @@ public class Clock {
 	private final SystemTimeProvider systemTimeProvider;
 	private boolean running;
 	private long startTime;
+    private long offsetTime;
 
-	public Clock(SystemTimeProvider systemTimeProvider) {
+    public Clock(SystemTimeProvider systemTimeProvider) {
 		this.systemTimeProvider = systemTimeProvider;
 	}
 
@@ -18,7 +19,7 @@ public class Clock {
     }
 
     public long getElapsedTime() {
-        return running ? systemTimeProvider.getElapsedRealTime() - startTime : 0L;
+        return running ? systemTimeProvider.getElapsedRealTime() - startTime : offsetTime;
     }
 
     public String getElapsedTimeString() {
@@ -32,5 +33,10 @@ public class Clock {
 	public void start() {
 		running = true;
 		startTime = systemTimeProvider.getElapsedRealTime();
+	}
+
+	public void pause() {
+		running = false;
+		offsetTime = systemTimeProvider.getElapsedRealTime();
 	}
 }

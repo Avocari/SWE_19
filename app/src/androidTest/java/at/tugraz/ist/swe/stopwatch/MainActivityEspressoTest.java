@@ -58,7 +58,7 @@ public class MainActivityEspressoTest {
 	}
 
 	@Test
-	public void testStartButtonRenamesButtonText() throws InterruptedException {
+	public void testStartButtonRenamesButtonText() {
 		onView(withId(R.id.bt_start)).perform(click());
 		onView(withId(R.id.bt_start)).check(matches(withText(R.string.pause)));
 	}
@@ -78,4 +78,12 @@ public class MainActivityEspressoTest {
 
 		onView(withId(R.id.tv_clock)).check(matches(withText(currentElapsedTime)));
 	}
+
+	@Test
+	public void testPauseButtonRenamesButtonText() {
+		onView(withId(R.id.bt_start)).perform(click());
+		onView(withId(R.id.bt_start)).perform(click());
+		onView(withId(R.id.bt_start)).check(matches(withText(R.string.start)));
+	}
+
 }
