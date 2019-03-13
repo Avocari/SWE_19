@@ -9,8 +9,8 @@ Create first working Branches (develop and first feature branch)
 ```
 git checkout -b develop
 git push origin develop
-git checkout -b feature/project_setup
-git push origin feature/project_setup
+git checkout -b feature/SW-001
+git push origin feature/SW-001
 ```
 
 # Project Setup
@@ -31,8 +31,8 @@ Delete all lines with /.idea* and just add /.idea
 commit and push to feature branch
 
 ```
-git commit -a -m "Project Setup"
-git push origin feature/project_setup
+git commit -a -m "SW-001 project setup [ST,WC]"
+git push origin feature/SW-001
 ```
 
 Create a Pull Request
@@ -44,7 +44,7 @@ Approve changes and Merge to develop
 Create a new branch for your feature
 
 ```
-git checkout -b feature/ui_buttons
+git checkout -b feature/SW-002
 ```
 
 ## Tests
@@ -130,7 +130,7 @@ Create a Pullrequest on Github and merge it into develop
 Create a new branch for your feature
 
 ```
-git checkout -b feature/ui_textview
+git checkout -b feature/SW-003
 ```
 
 ## Tests
@@ -179,7 +179,7 @@ Create a Pullrequest on Github and merge it into develop
 Create a new branch for your feature
 
 ```
-git checkout -b feature/start_button_functionality
+git checkout -b feature/SW-004
 ```
 
 ## Tests
@@ -509,12 +509,14 @@ Commit and push these changes
 
 Create a Pullrequest on Github and merge it into develop
 
+# ======== End of Tutorial =======
+
 # PauseButton functionalty
 
 Create a new branch for your feature
 
 ```
-git checkout -b feature/pause_button_functionality
+git checkout -b feature/SW-005
 ```
 
 ## Tests
@@ -688,7 +690,7 @@ public void pause() {
 Create a new branch for your feature
 
 ```
-git checkout -b feature/reset_button_functionality
+git checkout -b feature/SW-006
 ```
 
 ## Tests
